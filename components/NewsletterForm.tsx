@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export const NewsletterForm = () => {
   const [email, setEmail] = useState('');
@@ -32,18 +34,18 @@ export const NewsletterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row justify-center gap-4 max-w-2xl mx-auto">
+    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row justify-center gap-3 max-w-2xl mx-auto">
       <div className="flex-1">
         <label htmlFor="email" className="sr-only">
           Email address for newsletter signup
         </label>
-        <input
+        <Input
           id="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
-          className="w-full px-4 py-3 rounded-lg text-gray-800 min-h-[44px] focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent"
+          className="bg-white/95 backdrop-blur-sm border-white/20 h-12 text-base"
           required
           disabled={status === 'loading'}
           aria-required="true"
@@ -51,19 +53,20 @@ export const NewsletterForm = () => {
           aria-describedby={errorMessage ? 'email-error' : undefined}
         />
         {errorMessage && (
-          <p id="email-error" className="text-red-300 text-sm mt-2" role="alert">
+          <p id="email-error" className="text-red-200 text-sm mt-2" role="alert">
             {errorMessage}
           </p>
         )}
       </div>
-      <button
+      <Button
         type="submit"
         disabled={status === 'loading'}
-        className="px-6 py-3 bg-white text-purple-600 font-semibold rounded-lg hover:bg-gray-100 transition min-h-[44px] min-w-[120px] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        size="lg"
+        className="bg-white text-purple-600 hover:bg-gray-50 font-semibold h-12 min-w-[140px]"
         aria-busy={status === 'loading'}
       >
-        {status === 'loading' ? 'Submitting...' : 'Sign Up'}
-      </button>
+        {status === 'loading' ? 'Submitting...' : 'Get Started'}
+      </Button>
       {status === 'success' && (
         <p className="text-white text-sm mt-2 text-center w-full" role="status">
           ✓ Thanks for signing up! Check your email.
