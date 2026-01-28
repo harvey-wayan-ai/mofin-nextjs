@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import { Header } from '@/components/Header';
 import { HeroSection } from '@/components/sections/HeroSection';
+import { FeaturesSection } from '@/components/sections/FeaturesSection';
+import { FAQSection } from '@/components/sections/FAQSection';
 import { Section } from '@/components/ui/Section';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -27,27 +29,6 @@ export const metadata: Metadata = {
 };
 
 // Content constants
-const FEATURES = [
-  {
-    id: 1,
-    title: 'Smart Budgeting',
-    description: 'AI-powered budget recommendations based on your spending patterns and financial goals.',
-    icon: '💰',
-  },
-  {
-    id: 2,
-    title: 'Investment Tracking',
-    description: 'Real-time portfolio monitoring with comprehensive performance analytics and insights.',
-    icon: '📈',
-  },
-  {
-    id: 3,
-    title: 'Financial Insights',
-    description: 'Personalized recommendations to optimize your spending and grow your wealth.',
-    icon: '💡',
-  },
-];
-
 const WORKFLOW_STEPS = [
   {
     id: 1,
@@ -77,24 +58,28 @@ const TESTIMONIALS = [
     quote: 'Mofin helped me save $500 a month without changing my lifestyle!',
     author: 'Sarah Johnson',
     role: 'Small Business Owner',
+    rating: 5,
   },
   {
     id: 2,
     quote: 'The AI insights are incredibly accurate. Best financial app I\'ve used.',
     author: 'Michael Chen',
     role: 'Software Engineer',
+    rating: 5,
   },
   {
     id: 3,
     quote: 'Finally a finance app that actually understands my spending habits.',
     author: 'Emily Rodriguez',
     role: 'Marketing Manager',
+    rating: 5,
   },
   {
     id: 4,
     quote: 'Tracking my investments has never been easier. Highly recommended!',
     author: 'David Kim',
     role: 'Investor',
+    rating: 5,
   },
 ];
 
@@ -162,37 +147,21 @@ export default function Home() {
       <Header />
       
       <main id="main-content" className="min-h-screen">
-        {/* Hero Section */}
+        {/* Hero Section - New Animated Version */}
         <HeroSection />
 
-        {/* Features Section */}
-        <Section title="Powerful Features" background="white" id="features">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {FEATURES.map((feature) => (
-              <Card key={feature.id} className="border-purple-100 hover:border-purple-300 transition-all hover:shadow-lg">
-                <CardHeader>
-                  <div className="text-4xl mb-2">{feature.icon}</div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </Section>
+        {/* Features Section - New Animated Tabs Version */}
+        <FeaturesSection />
 
         {/* How It Works Section */}
-        <Section title="How It Works" background="gray" id="how-it-works">
+        <Section title="How It Works" background="white" id="how-it-works">
           <div className="max-w-3xl mx-auto space-y-6">
             {WORKFLOW_STEPS.map((step) => (
-              <Card key={step.id} className="border-l-4 border-l-purple-500">
+              <Card key={step.id} className="border-l-4 border-l-violet-500 hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="flex items-start gap-4">
                     <div 
-                      className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-lg shadow-lg"
+                      className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 via-purple-500 to-fuchsia-500 flex items-center justify-center text-white font-bold text-lg shadow-lg"
                       aria-label={`Step ${step.id}`}
                     >
                       {step.id}
@@ -211,12 +180,17 @@ export default function Home() {
         </Section>
 
         {/* Testimonials Section */}
-        <Section title="What Our Users Say" background="white" id="testimonials">
+        <Section title="What Our Users Say" background="gray" id="testimonials">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
             {TESTIMONIALS.map((testimonial) => (
-              <Card key={testimonial.id} className="bg-gradient-to-br from-purple-50 to-pink-50 border-purple-100">
+              <Card key={testimonial.id} className="bg-gradient-to-br from-violet-50 to-fuchsia-50 border-purple-100 hover:shadow-xl transition-shadow">
                 <CardHeader>
-                  <CardDescription className="text-base italic text-gray-700">
+                  <div className="flex gap-1 mb-3">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <span key={i} className="text-yellow-400 text-xl">★</span>
+                    ))}
+                  </div>
+                  <CardDescription className="text-base italic text-gray-700 leading-relaxed">
                     "{testimonial.quote}"
                   </CardDescription>
                 </CardHeader>
@@ -231,46 +205,6 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* Feature Showcase */}
-        <Section title="Why Choose Mofin?" background="gray">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-            {[
-              {
-                title: 'Bank-Level Security',
-                description: '256-bit encryption and two-factor authentication keep your financial data safe and secure.',
-                icon: '🔒',
-              },
-              {
-                title: 'Real-Time Sync',
-                description: 'Automatic transaction updates across all your connected accounts, available 24/7.',
-                icon: '⚡',
-              },
-              {
-                title: 'AI-Powered Insights',
-                description: 'Machine learning algorithms analyze your spending to provide personalized recommendations.',
-                icon: '🤖',
-              },
-              {
-                title: 'Mobile & Desktop',
-                description: 'Access your financial dashboard anywhere with our responsive web app and mobile apps.',
-                icon: '📱',
-              },
-            ].map((feature, index) => (
-              <Card key={index} className="hover:shadow-xl transition-shadow">
-                <CardHeader>
-                  <div className="text-4xl mb-2">{feature.icon}</div>
-                  <CardTitle>{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </Section>
-
         {/* Pricing Section */}
         <Section title="Simple, Transparent Pricing" background="dark" id="pricing">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -279,19 +213,19 @@ export default function Home() {
                 key={tier.name}
                 className={`relative overflow-hidden ${
                   tier.popular 
-                    ? 'border-purple-400 shadow-xl shadow-purple-500/20 bg-gradient-to-br from-gray-800 to-gray-900' 
+                    ? 'border-purple-400 shadow-xl shadow-purple-500/20 bg-gradient-to-br from-gray-800 to-gray-900 scale-105' 
                     : 'bg-gray-800 border-gray-700'
                 }`}
               >
                 {tier.popular && (
-                  <Badge className="absolute top-4 right-4 bg-purple-500 hover:bg-purple-600">
+                  <Badge className="absolute top-4 right-4 bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:shadow-lg">
                     Most Popular
                   </Badge>
                 )}
                 <CardHeader>
                   <CardTitle className="text-2xl text-white">{tier.name}</CardTitle>
                   <div className="mt-4">
-                    <span className="text-4xl font-bold text-white">${tier.price}</span>
+                    <span className="text-5xl font-bold text-white">${tier.price}</span>
                     <span className="text-gray-400 ml-2">/month</span>
                   </div>
                 </CardHeader>
@@ -314,7 +248,7 @@ export default function Home() {
                     }}
                     className={`w-full ${
                       tier.popular 
-                        ? 'bg-purple-500 hover:bg-purple-600' 
+                        ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:shadow-xl' 
                         : 'bg-gray-700 hover:bg-gray-600'
                     } text-white`}
                     size="lg"
@@ -328,16 +262,19 @@ export default function Home() {
           </div>
         </Section>
 
+        {/* FAQ Section - New Accordion Component */}
+        <FAQSection />
+
         {/* Blog/News Section */}
         <Section title="Latest Insights" background="white">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {ARTICLES.map((article) => (
-              <Card key={article.id} className="border-purple-100 hover:border-purple-300 transition-all hover:shadow-lg group">
+              <Card key={article.id} className="border-purple-100 hover:border-purple-300 transition-all hover:shadow-xl group">
                 <CardHeader>
-                  <Badge variant="secondary" className="w-fit mb-2 bg-purple-100 text-purple-700">
+                  <Badge variant="secondary" className="w-fit mb-2 bg-gradient-to-r from-violet-100 to-fuchsia-100 text-violet-700 border-violet-200">
                     {article.category}
                   </Badge>
-                  <CardTitle className="text-xl group-hover:text-purple-600 transition-colors">
+                  <CardTitle className="text-xl group-hover:text-violet-600 transition-colors">
                     {article.title}
                   </CardTitle>
                 </CardHeader>
@@ -347,7 +284,7 @@ export default function Home() {
                   </CardDescription>
                   <Button
                     variant="link"
-                    className="p-0 h-auto text-purple-600 hover:text-purple-700"
+                    className="p-0 h-auto text-violet-600 hover:text-violet-700"
                     onClick={() => console.log(`Read article: ${article.title}`)}
                   >
                     Read More →
@@ -359,18 +296,24 @@ export default function Home() {
         </Section>
 
         {/* CTA Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-purple-600 to-pink-600 text-white">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-4">Ready to Take Control of Your Finances?</h2>
+        <section className="py-20 px-4 bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 text-white relative overflow-hidden">
+          {/* Background decoration */}
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-pink-300 rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="max-w-4xl mx-auto text-center relative z-10">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">Ready to Take Control of Your Finances?</h2>
             <p className="text-xl mb-8 text-purple-100">
               Join thousands of users already managing their money smarter with Mofin.
             </p>
             <Button 
               size="lg" 
-              className="bg-white text-purple-600 hover:bg-gray-50 text-lg px-8 py-6 h-auto"
+              className="bg-white text-violet-600 hover:bg-gray-50 text-lg px-8 py-6 h-auto shadow-2xl hover:shadow-3xl transition-all"
               onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Start Free Trial
+              Start Free Trial →
             </Button>
           </div>
         </section>
@@ -381,41 +324,41 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent mb-4">
                 Mofin
               </h3>
-              <p className="text-sm">
+              <p className="text-sm text-gray-400 leading-relaxed">
                 Smart financial management for the modern world.
               </p>
             </div>
             <div>
-              <h4 className="font-semibold mb-3">Product</h4>
+              <h4 className="font-semibold mb-3 text-white">Product</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#features" className="hover:text-white transition">Features</a></li>
-                <li><a href="#pricing" className="hover:text-white transition">Pricing</a></li>
-                <li><a href="#" className="hover:text-white transition">Security</a></li>
+                <li><a href="#features" className="hover:text-violet-400 transition">Features</a></li>
+                <li><a href="#pricing" className="hover:text-violet-400 transition">Pricing</a></li>
+                <li><a href="#" className="hover:text-violet-400 transition">Security</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-3">Company</h4>
+              <h4 className="font-semibold mb-3 text-white">Company</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-white transition">About</a></li>
-                <li><a href="#" className="hover:text-white transition">Blog</a></li>
-                <li><a href="#" className="hover:text-white transition">Careers</a></li>
+                <li><a href="#" className="hover:text-violet-400 transition">About</a></li>
+                <li><a href="#" className="hover:text-violet-400 transition">Blog</a></li>
+                <li><a href="#" className="hover:text-violet-400 transition">Careers</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-3">Legal</h4>
+              <h4 className="font-semibold mb-3 text-white">Legal</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-white transition">Privacy</a></li>
-                <li><a href="#" className="hover:text-white transition">Terms</a></li>
-                <li><a href="#" className="hover:text-white transition">Cookie Policy</a></li>
+                <li><a href="#" className="hover:text-violet-400 transition">Privacy</a></li>
+                <li><a href="#" className="hover:text-violet-400 transition">Terms</a></li>
+                <li><a href="#" className="hover:text-violet-400 transition">Cookie Policy</a></li>
               </ul>
             </div>
           </div>
           <Separator className="bg-gray-800 mb-8" />
           <div className="text-center text-sm">
-            <p>&copy; 2024 Mofin. All rights reserved.</p>
+            <p>&copy; 2024 Mofin. All rights reserved. Made with ❤️ using AI.</p>
           </div>
         </div>
       </footer>
