@@ -2,6 +2,7 @@
 
 import { Header } from '@/components/Header';
 import { HeroSection } from '@/components/sections/HeroSection';
+import { StatsSection } from '@/components/sections/StatsSection';
 import { FeaturesSection } from '@/components/sections/FeaturesSection';
 import { FAQSection } from '@/components/sections/FAQSection';
 import { Section } from '@/components/ui/Section';
@@ -131,6 +132,9 @@ export default function Home() {
       <main id="main-content" className="min-h-screen">
         {/* Hero Section - New Animated Version */}
         <HeroSection />
+
+        {/* Stats Section - Animated Numbers */}
+        <StatsSection />
 
         {/* Features Section - New Animated Tabs Version */}
         <FeaturesSection />
