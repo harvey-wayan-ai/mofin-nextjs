@@ -1,4 +1,5 @@
-import { Metadata } from 'next';
+'use client';
+
 import { Header } from '@/components/Header';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { FeaturesSection } from '@/components/sections/FeaturesSection';
@@ -8,25 +9,6 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-
-export const metadata: Metadata = {
-  title: 'Mofin - Your Financial Future Starts Here',
-  description: 'Smart financial management platform with AI-powered budgeting, investment tracking, and personalized financial insights for modern investors.',
-  keywords: ['finance', 'budgeting', 'investment', 'financial planning', 'AI finance'],
-  openGraph: {
-    title: 'Mofin - Smart Financial Management',
-    description: 'AI-powered financial platform for modern investors',
-    url: 'https://mofin-nextjs.vercel.app',
-    siteName: 'Mofin',
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Mofin - Smart Financial Management',
-    description: 'AI-powered financial platform for modern investors',
-  },
-};
 
 // Content constants
 const WORKFLOW_STEPS = [
